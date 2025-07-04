@@ -15,6 +15,7 @@ use GraphQL\Utils\Utils;
  * @phpstan-type InputCustomScalarConfig array{
  *   name?: string|null,
  *   description?: string|null,
+ *   specifiedByURL?: string|null,
  *   serialize?: callable(mixed): mixed,
  *   parseValue: callable(mixed): mixed,
  *   parseLiteral: callable(ValueNode&Node, array<string, mixed>|null): mixed,
@@ -24,6 +25,7 @@ use GraphQL\Utils\Utils;
  * @phpstan-type OutputCustomScalarConfig array{
  *   name?: string|null,
  *   description?: string|null,
+ *   specifiedByURL?: string|null,
  *   serialize: callable(mixed): mixed,
  *   parseValue?: callable(mixed): mixed,
  *   parseLiteral?: callable(ValueNode&Node, array<string, mixed>|null): mixed,

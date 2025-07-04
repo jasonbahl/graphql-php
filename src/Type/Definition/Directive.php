@@ -26,6 +26,8 @@ class Directive
     public const SKIP_NAME = 'skip';
     public const DEPRECATED_NAME = 'deprecated';
     public const REASON_ARGUMENT_NAME = 'reason';
+    public const SPECIFIED_BY_NAME = 'specifiedBy';
+    public const URL_ARGUMENT_NAME = 'url';
 
     /**
      * Lazily initialized.
@@ -81,6 +83,7 @@ class Directive
             self::INCLUDE_NAME => self::includeDirective(),
             self::SKIP_NAME => self::skipDirective(),
             self::DEPRECATED_NAME => self::deprecatedDirective(),
+            self::SPECIFIED_BY_NAME => self::specifiedByDirective(),
         ];
     }
 
@@ -138,6 +141,23 @@ class Directive
                     'type' => Type::string(),
                     'description' => 'Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).',
                     'defaultValue' => self::DEFAULT_DEPRECATION_REASON,
+                ],
+            ],
+        ]);
+    }
+
+    public static function specifiedByDirective(): Directive
+    {
+        return self::$internalDirectives[self::SPECIFIED_BY_NAME] ??= new self([
+            'name' => self::SPECIFIED_BY_NAME,
+            'description' => 'Exposes a URL that specifies the behavior of this scalar.',
+            'locations' => [
+                DirectiveLocation::SCALAR,
+            ],
+            'args' => [
+                self::URL_ARGUMENT_NAME => [
+                    'type' => Type::nonNull(Type::string()),
+                    'description' => 'The URL that specifies the behavior of this scalar.',
                 ],
             ],
         ]);

@@ -224,6 +224,17 @@ final class IntrospectionTest extends TestCase
                                     'deprecationReason' => null,
                                 ],
                                 3 => [
+                                    'name' => 'specifiedByURL',
+                                    'args' => [],
+                                    'type' => [
+                                        'kind' => 'SCALAR',
+                                        'name' => 'String',
+                                        'ofType' => null,
+                                    ],
+                                    'isDeprecated' => false,
+                                    'deprecationReason' => null,
+                                ],
+                                4 => [
                                     'name' => 'fields',
                                     'args' => [
                                         0 => [
@@ -254,7 +265,7 @@ final class IntrospectionTest extends TestCase
                                     'isDeprecated' => false,
                                     'deprecationReason' => null,
                                 ],
-                                4 => [
+                                5 => [
                                     'name' => 'interfaces',
                                     'args' => [],
                                     'type' => [
@@ -273,7 +284,7 @@ final class IntrospectionTest extends TestCase
                                     'isDeprecated' => false,
                                     'deprecationReason' => null,
                                 ],
-                                5 => [
+                                6 => [
                                     'name' => 'possibleTypes',
                                     'args' => [],
                                     'type' => [
@@ -292,7 +303,7 @@ final class IntrospectionTest extends TestCase
                                     'isDeprecated' => false,
                                     'deprecationReason' => null,
                                 ],
-                                6 => [
+                                7 => [
                                     'name' => 'enumValues',
                                     'args' => [
                                         0 => [
@@ -323,7 +334,7 @@ final class IntrospectionTest extends TestCase
                                     'isDeprecated' => false,
                                     'deprecationReason' => null,
                                 ],
-                                7 => [
+                                8 => [
                                     'name' => 'inputFields',
                                     'args' => [
                                         0 => [
@@ -354,7 +365,7 @@ final class IntrospectionTest extends TestCase
                                     'isDeprecated' => false,
                                     'deprecationReason' => null,
                                 ],
-                                8 => [
+                                9 => [
                                     'name' => 'ofType',
                                     'args' => [],
                                     'type' => [
@@ -960,6 +971,30 @@ final class IntrospectionTest extends TestCase
                                 1 => 'ENUM_VALUE',
                                 2 => 'ARGUMENT_DEFINITION',
                                 3 => 'INPUT_FIELD_DEFINITION',
+                            ],
+                        ],
+                        [
+                            'name' => 'specifiedBy',
+                            'args' => [
+                                0 => [
+                                    'name' => 'url',
+                                    'type' => [
+                                        'kind' => 'NON_NULL',
+                                        'name' => null,
+                                        'ofType' => [
+                                            'kind' => 'SCALAR',
+                                            'name' => 'String',
+                                            'ofType' => null,
+                                        ],
+                                    ],
+                                    'defaultValue' => null,
+                                    'isDeprecated' => false,
+                                    'deprecationReason' => null,
+                                ],
+                            ],
+                            'isRepeatable' => false,
+                            'locations' => [
+                                0 => 'SCALAR',
                             ],
                         ],
                     ],

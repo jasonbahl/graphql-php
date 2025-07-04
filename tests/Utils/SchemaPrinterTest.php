@@ -1011,6 +1011,12 @@ final class SchemaPrinterTest extends TestCase
         reason: String = "No longer supported"
       ) on FIELD_DEFINITION | ENUM_VALUE | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
+      "Exposes a URL that specifies the behavior of this scalar."
+      directive @specifiedBy(
+        "The URL that specifies the behavior of this scalar."
+        url: String!
+      ) on SCALAR
+
       "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations."
       type __Schema {
         "A list of all types supported by this server."
@@ -1038,6 +1044,7 @@ final class SchemaPrinterTest extends TestCase
         kind: __TypeKind!
         name: String
         description: String
+        specifiedByURL: String
         fields(includeDeprecated: Boolean = false): [__Field!]
         interfaces: [__Type!]
         possibleTypes: [__Type!]

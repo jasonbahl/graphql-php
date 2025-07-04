@@ -417,6 +417,25 @@ class ASTDefinitionBuilder
     }
 
     /**
+     * Given a scalar node, returns the string value for the specifiedBy "url" arg.
+     *
+     * @param ScalarTypeDefinitionNode|ScalarTypeExtensionNode $node
+     *
+     * @throws \Exception
+     * @throws \ReflectionException
+     * @throws InvariantViolation
+     */
+    private function getSpecifiedByURL(Node $node): ?string
+    {
+        $specifiedBy = Values::getDirectiveValues(
+            Directive::specifiedByDirective(),
+            $node
+        );
+
+        return $specifiedBy['url'] ?? null;
+    }
+
+    /**
      * @param array<ObjectTypeDefinitionNode|ObjectTypeExtensionNode|InterfaceTypeDefinitionNode|InterfaceTypeExtensionNode> $nodes
      *
      * @throws \Exception
@@ -520,16 +539,31 @@ class ASTDefinitionBuilder
         ]);
     }
 
-    /** @throws InvariantViolation */
+    /**
+     * @throws \Exception
+     * @throws InvariantViolation
+     */
     private function makeScalarDef(ScalarTypeDefinitionNode $def): CustomScalarType
     {
         $name = $def->name->value;
         /** @var array<ScalarTypeExtensionNode> $extensionASTNodes (proven by schema validation) */
         $extensionASTNodes = $this->typeExtensionsMap[$name] ?? [];
 
+        // Extract specifiedByURL from the definition and extension nodes
+        $specifiedByURL = $this->getSpecifiedByURL($def);
+        if ($specifiedByURL === null) {
+            foreach ($extensionASTNodes as $extensionNode) {
+                $specifiedByURL = $this->getSpecifiedByURL($extensionNode);
+                if ($specifiedByURL !== null) {
+                    break;
+                }
+            }
+        }
+
         return new CustomScalarType([
             'name' => $name,
             'description' => $def->description->value ?? null,
+            'specifiedByURL' => $specifiedByURL,
             'serialize' => static fn ($value) => $value,
             'astNode' => $def,
             'extensionASTNodes' => $extensionASTNodes,

@@ -414,7 +414,7 @@ class Printer
                     return BlockString::print($node->value);
                 }
 
-                return json_encode($node->value, JSON_THROW_ON_ERROR);
+                return json_encode($node->value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
             case $node instanceof UnionTypeDefinitionNode:
                 $typesStr = $this->printList($node->types, ' | ');
